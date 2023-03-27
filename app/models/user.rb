@@ -3,7 +3,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+  has_many :folders
+ before_create :generate_user_id
+  
+  private
+  
+  def generate_user_id
+    self.user_id = SecureRandom.uuid
+  end
 
 enum role: [:user, :moderator, :admin]
   

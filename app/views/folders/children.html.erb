@@ -1,0 +1,11 @@
+<!-- _subfolders.html.erb -->
+<ul class="subfolder-list">
+  <% subfolders.each do |subfolder| %>
+    <li class="folder">
+      <%= link_to subfolder.name, subfolder %>
+      <% if subfolder.subfolders.any? %>
+        <%= render partial: 'subfolders', locals: { subfolders: subfolder.subfolders } %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

@@ -13,7 +13,7 @@ class FoldersController < ApplicationController
   end
 
   def new
-    @folder = Folder.new
+    @folder = @user.folders.build
     @parent_id = params[:parent_id]
   end
 
@@ -50,10 +50,11 @@ class FoldersController < ApplicationController
   end
 
   def set_folder
+    set_user
     @folder = @user.folders.find(params[:id])
   end
 
   def folder_params
-    params.require(:folder).permit(:name, :parent_id)
+    params.require(:folder).permit(:name, :parent_id, files: [])
   end
 end

@@ -1,0 +1,26 @@
+<%= form_with(model: [ @user, @folder ], url: user_folders_path(@user), local: true) do |form| %>
+  <% if @folder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+      <ul>
+      <% @folder.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%#= form.hiddenlabel :parent_id %>
+    <%#= form.hidden_select :parent_id, options_for_select(@user.folders.map{ |f| [f.name, f.id] }), include_blank: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Create Folder' %>
+  </div>
+<% end %>

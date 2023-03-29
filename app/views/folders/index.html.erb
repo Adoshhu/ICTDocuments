@@ -1,10 +1,13 @@
+<%= link_to 'New Folder', new_user_folder_path(@user) %>
+
 <ul class="folder-list">
   <% @folders.each do |folder| %>
     <li class="folder">
-      <%= link_to folder.name, folder %>
-      <% if folder.subfolders.any? %>
-        <%= render partial: 'subfolders', locals: { subfolders: folder.subfolders } %>
-      <% end %>
-    </li>
+  <%= link_to folder.name, user_folder_path(@user, folder) %>
+  <% if folder.children.any? %>
+    <%= render partial: 'subfolders', locals: { subfolders: folder.children } %>
+  <% end %>
+</li>
+
   <% end %>
 </ul>

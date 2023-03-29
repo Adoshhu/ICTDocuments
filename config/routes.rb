@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'page#index'
-  resources :folders, only: [:index, :show]
+  resources :folders
   devise_for :users
 
   resources :users do

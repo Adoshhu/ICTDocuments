@@ -1,0 +1,10 @@
+<ul class="subfolders">
+  <% subfolders.each do |subfolder| %>
+    <li class="folder">
+      <%= link_to subfolder.name, subfolder %>
+      <% if subfolder.children.any? %>
+        <%= render partial: 'subfolders', locals: { subfolders: subfolder.children } %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

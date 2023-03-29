@@ -14,15 +14,14 @@
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
-  
-    <%= render "folders/fileUpload", form: form %>
 
-  <div class="field">
-    <%#= form.hiddenlabel :parent_id %>
-    <%#= form.hidden_select :parent_id, options_for_select(@user.folders.map{ |f| [f.name, f.id] }), include_blank: true %>
-  </div>
+  <%= render "folders/fileUpload", form: form %>
+  <%= form.hidden_field :parent_id, value: @parent_id %>
+
+
+  <%= form.hidden_field :subfolder_id, value: @folder.subfolder_id %>
 
   <div class="actions">
-    <%= form.submit 'Create Folder' %>
+    <%= form.submit 'Create Folder', data: { turbo: false } %>
   </div>
 <% end %>

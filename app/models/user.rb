@@ -30,4 +30,10 @@ enum role: [:user, :moderator, :admin]
   def admin?
     role == 'admin'
   end
+  
+  has_one :root_folder, -> { where(parent_id: nil) }, class_name: 'Folder'
+
+  def create_root_folder
+    self.root_folder = Folder.create(name: 'root', parent_id: nil)
+  end
 end

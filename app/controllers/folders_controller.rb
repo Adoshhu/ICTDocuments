@@ -15,16 +15,33 @@ class FoldersController < ApplicationController
   def new
     @folder = @user.folders.build
     @parent_id = params[:parent_id]
+    if @parent_id.present?
+      @folder.parent = Folder.find_by(id: @parent_id)
+      if @folder.parent.present?
+        @folder.subfolder_id = @folder.parent.children.count + 1
+      else
+        @folder.subfolder_id = 1
+      end
+    end
   end
+  
+  
+  
 
   def create
     @folder = @user.folders.build(folder_params)
+    @folder.parent_id = params[:parent_id]
+    if @folder.parent.present?
+      @folder.subfolder_id = @folder.parent.subfolders.count + 1
+    end
     if @folder.save
       redirect_to user_folder_path(@user, @folder), notice: "Folder was successfully created."
     else
       render :new
     end
   end
+
+
 
   def edit
     @parent_id = @folder.parent_id
@@ -63,6 +80,6 @@ class FoldersController < ApplicationController
   end
 
   def folder_params
-    params.require(:folder).permit(:name, :parent_id, files: [])
+    params.require(:folder).permit(:name, :parent_id, :subfolder_id, files: [])
   end
 end

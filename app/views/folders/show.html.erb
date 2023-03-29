@@ -1,8 +1,10 @@
 
 
+<%= link_to 'New Folder', new_user_folder_path(@user) %>
 <% @subfolders.each do |folder| %>
     <%= link_to folder.name, folder %>
     <%= link_to 'edit', edit_user_folder_path(@user)%>
+    
     <% @folder.files.each do |attachment|%>
     <li>
         <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment") %>

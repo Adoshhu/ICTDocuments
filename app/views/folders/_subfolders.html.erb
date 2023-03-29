@@ -1,7 +1,7 @@
 <ul class="subfolders">
   <% subfolders.each do |subfolder| %>
     <li class="folder">
-      <%= link_to subfolder.name, subfolder %>
+      <%= link_to subfolder.name, user_folder_subfolder_path(user_id: @user.id, folder_id: folder.id, id: subfolder.id) %>
       <% if subfolder.children.any? %>
         <%= render partial: 'subfolders', locals: { subfolders: subfolder.children } %>
       <% end %>

@@ -51,7 +51,15 @@ class FoldersController < ApplicationController
 
   def set_folder
     set_user
-    @folder = @user.folders.find(params[:id])
+    if params[:id]
+      @folder = @user.folders.find(params[:id])
+    elsif params[:folder_id]
+      @folder = @user.folders.find(params[:folder_id])
+    end
+  end
+
+  def set_subfolder
+    @subfolder = @folder.children.find(params[:id])
   end
 
   def folder_params

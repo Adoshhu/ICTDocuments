@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users do
-    resources :folders
+    resources :folders do
+      resources :subfolders, controller: 'subfolders'
+    end
   end
 
   get "/login", to: "sessions#new"

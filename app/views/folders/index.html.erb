@@ -4,8 +4,9 @@
   <% @folders.each do |folder| %>
     <li class="folder">
   <%= link_to folder.name, user_folder_path(@user, folder) %>
+  <%= button_to 'Delete', user_folder_path(@user, folder),method: :delete%>
   <% if folder.children.any? %>
-    <%= render partial: 'subfolders', locals: { subfolders: folder.children } %>
+    <%= render partial: 'subfolders', locals: { subfolders: folder.children, user: @user, folder: folder } %>
   <% end %>
 </li>
 

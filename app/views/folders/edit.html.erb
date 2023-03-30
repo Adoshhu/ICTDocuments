@@ -1,5 +1,25 @@
 <h1>Edit Folder</h1>
 
-<%= render 'form', folder: @folder %>
+<% if @folder.parent_id.present? %>
+  <p>Parent folder: <%= @folder.parent.name %></p>
+<% end %>
 
-<%= link_to 'Back', user_folders_path(@user) %>
+<%= form_with(model: [ @user, @folder ], url: user_folders_path(@user), local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <%= render "folders/fileUpload", form: form %>
+
+  <div class="actions">
+    <%= form.submit 'Create', data: { turbo: false } %>
+  </div>
+<% end %>
+
+<% if @folder.parent_id.present? %>
+  <%= link_to 'Back', @folder.parent %>
+<% else %>
+  <%= link_to 'Back', user_folders_path %>
+<% end %>

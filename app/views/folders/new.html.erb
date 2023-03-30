@@ -1,5 +1,29 @@
-<h1>New Folder</h1>
+<%= form_with(model: [ @user, @folder ], url: user_folders_path(@user), local: true) do |form| %>
+  <% if @folder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+      <ul>
+      <% @folder.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= render 'form', folder: @folder %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
 
-<%= link_to 'Back', user_folders_path(@user) %>
+  <%= render "folders/fileUpload", form: form %>
+  <%= form.hidden_field :parent_id, value: params[:parent_id] %>
+  <div class="actions">
+    <%= form.submit 'Create', data: { turbo: false } %>
+  </div>
+<% end %>
+
+<% if @folder.parent_id.present? %>
+  <%= link_to 'Back', @folder.parent %>
+<% else %>
+  <%= link_to 'Back', user_folders_path %>
+<% end %>

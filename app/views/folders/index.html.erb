@@ -1,14 +1,11 @@
-<%= link_to 'New Folder', new_user_folder_path(@user) %>
-
-<ul class="folder-list">
-  <% @folders.each do |folder| %>
-    <li class="folder">
-  <%= link_to folder.name, user_folder_path(@user, folder) %>
-  <%= button_to 'Delete', user_folder_path(@user, folder),method: :delete%>
-  <% if folder.children.any? %>
-    <%= render partial: 'subfolders', locals: { subfolders: folder.children, user: @user, folder: folder } %>
-  <% end %>
-</li>
-
+<ul>
+  <% if @folders %>
+    <% @folders.each do |folder| %>
+      <%= link_to folder.name, user_folder_path(@user, folder) %>
+    <% end %>
+  <% else %>
+    <li>No folders found.</li>
   <% end %>
 </ul>
+<%= current_user.user_id%>
+<%= link_to 'New Folder', new_user_folder_path %>

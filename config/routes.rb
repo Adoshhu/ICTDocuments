@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :subfolders, controller: 'folders', only: [:create, :new]
     end
   end
+  
   root 'page#index'
   resources :folders
   devise_for :users

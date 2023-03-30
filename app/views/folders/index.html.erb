@@ -1,8 +1,8 @@
 <ul>
-  <% if @folders %>
+  <% if @folders.present? %>
     <% @folders.each do |folder| %>
-      <%= link_to folder.name, user_folder_path(@user, folder) %>
-    <% end %>
+      <%= link_to folder.name, user_folders_path(@user, folder) %>
+    <% end %> 
   <% else %>
     <li>No folders found.</li>
   <% end %>

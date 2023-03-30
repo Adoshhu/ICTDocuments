@@ -1,7 +1,7 @@
 # app/controllers/folders_controller.rb
 class FoldersController < ApplicationController
   before_action :set_user
-  #before_action :set_folder, only: [:show,:edit,:update,:destroy,:index]
+  before_action :set_folder, only: [:show,:edit,:update,:destroy]
 
   def index
     @folders = Folder.roots 

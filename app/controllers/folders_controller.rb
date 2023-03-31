@@ -8,16 +8,10 @@ class FoldersController < ApplicationController
   end
 
   def show    
-    @folders = @user.folders
+    @folder = @user.folders.find(params[:id])
+    @subfolder = @folder.subfolders.build
   end
 
-  def subfolders_show
-    @subfolders = @folder.subfolders
-  end 
-
-  def new_subfolder
-
-  end 
 
   def new
     @folder = @user.folders.build

@@ -1,13 +1,11 @@
-<% if @subfolder.present?%>
-  <% @folder.each do | folder |%>
-    <%= link_to folder.name, user_folder_subfolder_path(@user, folder, folder_id: folder.id) %>
+<% if @subfolders.present?%>
+  <% @subfolders.each do |subfolder| %>
+    <%= link_to subfolder.name, user_folder_subfolder_path(@user, @folder, subfolder, folder_id: @folder.id) %>
   <% end %>
-  
 <% else %>
   <h1> NO Subfolder </h1>
 <%end %>
 
-
 <h1>Files </h1>
 
-<%#= link_to 'create folder', new_user_folder_subfolder(@user)%>
+<%= link_to 'New Subfolder', new_user_folder_subfolder_path(@user, @folder) %>

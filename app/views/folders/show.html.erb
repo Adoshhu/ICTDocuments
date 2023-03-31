@@ -1,28 +1,13 @@
-<% if @subfolders.any? %>
-  <h2>Subfolders</h2>
-  <ul>
-    <% @subfolders.each do |subfolder| %>
-      <li><%= link_to subfolder.name, subfolder %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% if @folder.files.attached? %>
-  <h2>Files</h2>
-  <ul>
-  <% @folder.files.each do |attachment| %>
-    <li>
-      <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment") %>
-      <%= button_to "delete", purge_attachment_path(attachment), method: :delete %>
-    </li>
+<% if @subfolder.present?%>
+  <% @folder.each do | folder |%>
+    <%= link_to folder.name, user_folder_subfolder_path(@user, folder, folder_id: folder.id) %>
   <% end %>
-</ul>
-<% end %>
+  
+<% else %>
+  <h1> NO Subfolder </h1>
+<%end %>
 
-<%= link_to 'Add files', edit_user_folder_path(@folder) %> |
-<%= button_to 'Delete', user_folder_path(@folder), method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'New Subfolder', new_user_folder_path(parent_id: @folder.id) %>
-</br>
-</br>
 
-<%= link_to "Back", :back %>
+<h1>Files </h1>
+
+<%#= link_to 'create folder', new_user_folder_subfolder(@user)%>

@@ -4,8 +4,9 @@ class FoldersController < ApplicationController
   before_action :set_folder, only: [:show,:edit,:update,:destroy]
 
   def index
+    @user = current_user
+    @folders = @user.folders
     @folders = Folder.all
-    
   end
 
   def show    
@@ -56,10 +57,14 @@ class FoldersController < ApplicationController
   end
 
   def destroy
+    @folder.subfolders.each do |subfolder|
+      subfolder.destroy
+    end
     @folder.destroy 
     @folder.files.purge
     redirect_to folders_url, notice: 'Folder was successfully destroyed.'
   end
+  
 
   private
 

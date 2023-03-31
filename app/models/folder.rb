@@ -6,5 +6,11 @@ class Folder < ApplicationRecord
   has_many :subfolders, class_name: "Folder", foreign_key: "parent_id", dependent: :destroy
   has_many_attached :files, dependent: :destroy
   
-  
+  def create
+    if parent_id.present?
+      parent = Folder.find_by(id: parent_id)
+      self.parent = parent if parent
+    end
+    super
+  end
 end

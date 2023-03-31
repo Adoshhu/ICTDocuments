@@ -6,10 +6,5 @@ class Folder < ApplicationRecord
   has_many :subfolders, class_name: "Folder", foreign_key: "parent_id", dependent: :destroy
   has_many_attached :files, dependent: :destroy
   
-
-
-  def self.roots
-    where(parent_id: nil)
-  end
   
 end

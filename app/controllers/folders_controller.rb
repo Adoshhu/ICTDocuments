@@ -1,15 +1,17 @@
 # app/controllers/folders_controller.rb
 class FoldersController < ApplicationController
   before_action :set_user
-  before_action :set_folder, only: [:edit,:update,:destroy]
+  before_action :set_folder, only: [:show,:edit,:update,:destroy]
 
   def index
     @folders = Folder.all
+    
   end
 
   def show    
     @folder = @user.folders.find(params[:id])
-    @subfolder = @folder.subfolders.build
+    @subfolders = Subfolder.all
+    @current_folder = @folder
   end
 
 
@@ -66,8 +68,7 @@ class FoldersController < ApplicationController
   end
 
   def set_folder
-    set_user
-    @folder = @user.folders.find(params[:folder_id])
+    @folder = @user.folders.find(params[:id])
   end
 
   def folder_params

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :folders do
-      resources :subfolders, only: [:show, :create, :new]
+      resources :subfolders
     end
   end
 

@@ -1,11 +1,12 @@
+<%= @user.email%>
 <ul>
   <% if @folders.present? %>
     <% @folders.each do |folder| %>
-      <%= link_to folder.name, user_folders_path(@user, folder) %>
+      <%= link_to folder.name, folder_subfolders_path(folder) %>
     <% end %> 
   <% else %>
     <li>No folders found.</li>
   <% end %>
 </ul>
-<%= current_user.user_id%>
+
 <%= link_to 'New Folder', new_user_folder_path %>

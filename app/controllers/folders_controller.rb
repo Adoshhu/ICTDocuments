@@ -4,12 +4,12 @@ class FoldersController < ApplicationController
   before_action :set_folder, only: [:show,:edit,:update,:destroy]
 
   def index
-    @folders = Folder.roots 
+    @folders = Folder.all
   end
 
   def show    
-    @subfolders = @user.folders
-    @files = @folder.files
+    @folders = @user.folders
+    @files = @folders.files
   end
 
   def new
@@ -34,7 +34,7 @@ class FoldersController < ApplicationController
     end
   
     if @folder.save
-      redirect_to user_folder_path(@user, @folder), notice: "Folder was successfully created."
+      redirect_to user_folders_path(@user, @folder), notice: "Folder was successfully created."
     else
       render :new
     end
@@ -46,7 +46,7 @@ class FoldersController < ApplicationController
 
   def update
     if @folder.update(folder_params)
-      redirect_to user_folder_path(@user, @folder), notice: "Folder was successfully updated."
+      redirect_to user_folders_path(@user, @folder), notice: "Folder was successfully updated."
     else
       render :edit
     end

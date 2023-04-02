@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :folders do
-      resources :subfolders
+      resources :subfolders do 
+        get '/:id', to: 'subfolders#show', as: 'subfolder_show'
+      end
     end
   end
 

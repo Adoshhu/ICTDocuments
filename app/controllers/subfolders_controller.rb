@@ -4,18 +4,16 @@ class SubfoldersController < ApplicationController
     # GET /subfolders/new
     def new
       @subfolder = Subfolder.new
+      @subfolder.parent_id = params[:parent_id] if params[:parent_id].present?
     end
 
     def index
-        @subfolder = Subfolder.all
+      @subfolders = Subfolder.all
     end
 
     def show
-        #new code
-        @user = User.find(params[:user_id])
-        @folder = @user.folders.find(params[:folder_id])
-        #end here
-        @subfolder = @folder.subfolders.build
+      @subfolder = Subfolder.find(params[:id])
+      @current_folder = @subfolder
     end
 
     # POST /subfolders
@@ -40,7 +38,7 @@ class SubfoldersController < ApplicationController
     end
   
     def subfolder_params
-      params.require(:subfolder).permit(:name)
+      params.require(:subfolder).permit(:name, :parent_id)
     end
   end
   

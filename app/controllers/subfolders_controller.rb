@@ -12,8 +12,9 @@ class SubfoldersController < ApplicationController
     end
 
     def show
-      @subfolder = Subfolder.find(params[:id])
-      @current_folder = @subfolder
+      @user = User.find(params[:user_id])
+      @subfolders = @user.folders.find(params[:folder_id]).subfolders.find(params[:id])
+      @current_folder = @subfolders
     end
 
     # POST /subfolders

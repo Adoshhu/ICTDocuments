@@ -16,7 +16,7 @@
   </div>
 
   <%= render "folders/fileUpload", form: form %>
-  <%= form.hidden_field :parent_id, value: params[:parent_id] %>
+
   <div class="actions">
     <%= form.submit 'Create', data: { turbo: false } %>
   </div>

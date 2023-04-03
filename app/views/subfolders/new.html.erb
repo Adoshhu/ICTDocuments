@@ -1,6 +1,7 @@
 <h1>New Subfolder</h1>
 
-<%= form_with(url: user_folder_subfolders_path(@user, @folder), local: true) do |form| %>
+<%= form_with(model: [@user, @folder, @subfolder], url: user_folder_subfolders_path(@user, @folder), local: true) do |form| %>
+
   <% if @subfolder.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@subfolder.errors.count, "error") %> prohibited this subfolder from being saved:</h2>

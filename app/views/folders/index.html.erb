@@ -4,6 +4,8 @@
     <% @folders.each do |folder| %>
     <li>
       <%= link_to folder.name, user_folder_path(@user, folder) %>
+      <%= button_to 'Delete', user_folder_path(@user.id, folder), data: { confirm: 'Are you sure?' }, method: :delete%>
+
     </li>
     <% end %> 
   <% else %>

@@ -1,18 +1,35 @@
 class SubfoldersController < ApplicationController
-    before_action :set_user_folder
+    before_action :set_user_folder, only: [:new, :create]
   
+    # GET /subfolders/new
     def new
-      @subfolder = @folder.subfolders.build
+      @subfolder = Subfolder.new
+      @subfolder.parent_id = params[:parent_id] if params[:parent_id].present?
     end
-  
+
+    def index
+      @subfolders = Subfolder.all
+    end
+
+    def show
+      @user = User.find(params[:user_id])
+      @subfolders = @user.folders.find(params[:folder_id]).subfolders.find(params[:id])
+      @current_folder = @subfolders
+    end
+
+    # POST /subfolders
     def create
-      @subfolder = @folder.subfolders.build(subfolder_params)
+      @subfolder = Subfolder.new(subfolder_params)
+      @subfolder.folder = @folder
+  
       if @subfolder.save
         redirect_to user_folder_path(@user, @folder), notice: 'Subfolder was successfully created.'
       else
         render :new
       end
     end
+  
+    # ...
   
     private
   
@@ -22,7 +39,7 @@ class SubfoldersController < ApplicationController
     end
   
     def subfolder_params
-      params.require(:folder).permit(:name, :parent_id)
+      params.require(:subfolder).permit(:name, :parent_id)
     end
   end
   

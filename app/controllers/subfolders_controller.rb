@@ -13,8 +13,9 @@ class SubfoldersController < ApplicationController
 
     def show
       @user = User.find(params[:user_id])
-      @subfolders = @user.folders.find(params[:folder_id]).subfolders.find(params[:id])
+      @subfolders = @user.folders.find(params[:folder_id])
       @current_folder = @subfolders
+      @sub = @current_folder.all
     end
 
     # POST /subfolders
@@ -39,7 +40,7 @@ class SubfoldersController < ApplicationController
     end
   
     def subfolder_params
-      params.require(:subfolder).permit(:name, :parent_id)
+      params.require(:subfolder).permit(:name, :parent_id,:folder_id)
     end
   end
   

@@ -1,16 +1,26 @@
-
-
-<% @subfolders.each do | sub |%>
-  
-  <% if sub.folder_id == @current_folder.id %>
-    <%= link_to sub.name, user_folder_subfolder_path(@user,@folder,sub) %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subfolders.each do |sub| %>
+      <tr>
+      <% if sub.folder_id == @current_folder.id %>
+        <td><%= sub.name%></td>
+        <td><%= sub.id %></td>
+        <td><%= link_to 'Show', subfolder_path(sub.id) %></td>
+      <% else %>
+      <% end %>
+      </tr>
+    <% end %>
     
-  <% else %>
-  
-  <% end %>
-<% end %>
+  </tbody>
+</table>
 
 
 <h1>Files </h1>
 
-<%= link_to 'New Subfolder', new_user_folder_subfolder_path(@user, @folder) %>

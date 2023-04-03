@@ -1,10 +1,18 @@
-<% if current_user %>
-<%= current_user.user_id%>
-<%= link_to "Edit Account", edit_user_registration_path %>
-<%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
-<%= link_to 'View Folders', user_folders_path(@user) %>
+<div class="container">
+        <div class="form-box">
+            <h1 id="title">CEU ARCH</h1>
+            <form>
+                <img src="/assets/images/logo.png" alt="CEU Logo"/>
+                <div class="btn-field">
+                    <% if current_user %>
+                        <%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
+                    <% else %>
+                        <%= link_to "Login", new_user_session_path %>
+                        <%= link_to "Sign Up", new_user_registration_path %>
+                    <% end %>
+                </div>
 
-<% else %>
-<%= link_to "Login", new_user_session_path %>
-<%= link_to "Create Account", new_user_registration_path %>
-<% end %>
+            </form>
+        </div>
+
+    </div>

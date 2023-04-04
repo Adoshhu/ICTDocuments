@@ -1,9 +1,3 @@
-<% @subfolders.each do | sub |%>
-  
-  <% if sub.folder_id == @current_folder.id %>
-    <%= link_to sub.name, user_folder_subfolder_path(@user,@folder,sub) %>
-    
-  <% else %>
-  
-  <% end %>
-<% end %>
+<%= @subfolder.id %>
+
+<%= link_to 'New subfolder', new_subfolder_path(@subfolder.id) %>

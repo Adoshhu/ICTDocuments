@@ -7,12 +7,23 @@
                 </div>
                 <div class="btn-field">
                     <% if current_user %>
+<<<<<<< HEAD
                         <a href="/logout" class="button">Logout</a>
                         <%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
                         <%= link_to 'Folders', user_folders_path(@user, @folder)%>
                     <% else %>
                         <%= link_to "Login", new_user_session_path %>
                         <%= link_to "Sign Up", new_user_registration_path %>
+=======
+                        <%= current_user.user_id%>
+<%= link_to "Edit Account", edit_user_registration_path %>
+<%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
+<%= link_to 'View Folders', user_folders_path(@user) %>
+
+<% else %>
+<%= link_to "Login", new_user_session_path %>
+<%= link_to "Create Account", new_user_registration_path %>
+>>>>>>> 7a915991d7a630d43265c6087a6f7c48c741d95b
                     <% end %>
                 </div> 
 
